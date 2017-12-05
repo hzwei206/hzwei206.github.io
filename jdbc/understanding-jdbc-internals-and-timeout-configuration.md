@@ -49,7 +49,7 @@
 
 　　当在应用中调用DBCP的getConnection()方法时，你可以设置获取数据库连接的超时时间，但是这和JDBC的timeout毫不相关。 
 
-　![图3 Timeout for Each Levels](../sources/images/jdbc/Timeout_for_Each_Levels.png.png)   
+　![图3 Timeout for Each Levels](../sources/images/jdbc/Timeout_for_Each_Levels.png)   
 　　　图3 Timeout for Each Levels.
 
 　**什么是Transaction Timeout？**   
@@ -121,7 +121,7 @@
 
 　　7. 通过ConnectionJDBC向正在执行的query发送cancel消息 
 
-　![图5 QueryTimeout Execution Process for JTDS Statement](../sources/images/jdbc/QueryTimeout_Execution_Process_for_JTDS_Statement.png.png)  
+　![图5 QueryTimeout Execution Process for JTDS Statement](../sources/images/jdbc/QueryTimeout_Execution_Process_for_JTDS_Statement.png)  
 　　　图5 QueryTimeout Execution Process for JTDS (MS SQLServer) Statement.
 
 　**MySQL JDBC Statement的QueryTimeout处理过程**   
@@ -186,8 +186,8 @@
 
 　　下面展示了socket timeout的两个设置项，不同的JDBC驱动其配置方式会有所不同。 
 
-　　　(1)socket连接时的timeout：通过Socket.connect(SocketAddress endpoint, int timeout)设置  
-　　　(2)socket读写时的timeout：通过Socket.setSoTimeout(int timeout)设置  
+　　(1)socket连接时的timeout：通过Socket.connect(SocketAddress endpoint, int timeout)设置  
+　　(2)socket读写时的timeout：通过Socket.setSoTimeout(int timeout)设置  
 　　通过查看CUBRID，MySQL，MS SQL Server (JTDS)和Oracle的JDBC驱动源码，我们发现所有的驱动内部都是使用上面的2个API来设置socket timeout的。 
 
 　　下面是不同驱动的socket timeout配置方式。
@@ -199,8 +199,8 @@
 |Oracle Thin Driver |oracle.net.CONNECT_TIMEOUT<br>（默认值：0，单位：ms）|oracle.jdbc.ReadTimeout（默认值：0，单位：ms）|不支持通过url配置，只能通过OracleDatasource.setConnectionProperties() API设置，使用DBCP时可以调用BasicDatasource.setConnectionProperties()或BasicDatasource.addConnectionProperties()进行设置| 
 |CUBRID Thin Driver|无独立配置项（默认值：5,000，单位：ms）|无独立配置项（默认值：5,000，单位：ms）|  |  
 		 	 
-　　　(1)connectTimeout和socketTimeout的默认值为0时，timeout不生效。  
-　　　(2)除了调用DBCP的API以外，还可以通过properties属性进行配置。  
+　(1)connectTimeout和socketTimeout的默认值为0时，timeout不生效。  
+　(2)除了调用DBCP的API以外，还可以通过properties属性进行配置。  
 　　通过properties属性进行配置时，需要传入key为“connectionProperties”的键值对，value的格式为“[propertyName=property;]*”。下面是iBatis中的properties配置。 
 
 　　xml代码：
